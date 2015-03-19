@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="10:00"
+        android:id="@+id/start_time"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CS4212"
+        android:id="@+id/module_code"
+        android:layout_alignBottom="@+id/start_time"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="KBG12"
+        android:id="@+id/room_code"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/module_code"
+        android:layout_toEndOf="@+id/module_code"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="11:00"
+        android:id="@+id/end_time"
+        android:layout_below="@+id/start_time"
+        android:layout_alignLeft="@+id/start_time"
+        android:layout_alignStart="@+id/start_time" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Lecture"
+        android:id="@+id/session_type"
+        android:layout_below="@+id/module_code"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
