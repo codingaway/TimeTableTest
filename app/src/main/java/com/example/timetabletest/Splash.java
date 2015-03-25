@@ -29,16 +29,16 @@ public class Splash extends Activity{
                 /* Create an Intent that will start the Menu-Activity. */
                 SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                 String studentID = sharedPref.getString("studentID", "ID not found");
-                //if(studentID.equals("") || studentID.equals("ID not found")) {
+                if(studentID.equals("") || studentID.equals("ID not found")) {
                     Intent loginIntent = new Intent(Splash.this, Login.class);
                     Splash.this.startActivity(loginIntent);
                     Splash.this.finish();
-//                }
-//                else{
-//                    Intent mainIntent = new Intent(Splash.this, MainActivity.class);
-//                    Splash.this.startActivity(mainIntent);
-//                    Splash.this.finish();
-//                }
+                }
+                else{
+                    Intent mainIntent = new Intent(Splash.this, Login.class);
+                    Splash.this.startActivity(mainIntent);
+                    Splash.this.finish();
+                }
             }
         }, SPLASH_DISPLAY_LENGTH);
      }

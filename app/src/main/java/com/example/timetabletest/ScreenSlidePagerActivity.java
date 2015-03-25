@@ -14,7 +14,10 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by casper on 18/03/15.
@@ -41,7 +44,23 @@ public class ScreenSlidePagerActivity extends FragmentActivity{
         viewPager.setAdapter(mPagerAdapter);
         Log.d("LOG", "ViewPager Loaded!");
 
+        //Get Day of the week and change to integer value representing the page fragment to load in adapter
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        weekDay = dayFormat.format(calendar.getTime());
 
+        int position = 0;
+        switch(weekDay){
+            case("Monday"):     position = 0; break;
+            case("Tuesday"):    position = 1; break;
+            case("Wednesday"):  position = 2; break;
+            case("Thursday"):   position = 3; break;
+            case("Friday"):     position = 4; break;
+            case("Saturday"):   position = 5; break;
+            //case("Sunday"):     position = 6; break;
+        }
+        viewPager.setCurrentItem(position);
     }
 
     @Override

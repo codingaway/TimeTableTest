@@ -2,7 +2,7 @@ package com.example.timetabletest;
 
 //import android.support.v4.view.ViewPager;
 import java.util.*;
-import java.io.*;
+//import java.io.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

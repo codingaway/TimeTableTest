@@ -13,8 +13,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.File;
-import java.io.FileOutputStream;
+//import java.io.File;
+//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class DownloadDataIntentService extends IntentService {
 
                     try {
                         //oos = new ObjectOutputStream(new FileOutputStream(file));
-                        oos = new ObjectOutputStream(openFileOutput("data.dat", Context.MODE_PRIVATE));
+                        oos = new ObjectOutputStream(openFileOutput(filename, Context.MODE_PRIVATE));
                         oos.writeObject(days);
                     } catch (IOException ex) {
                         if(receiver != null)
