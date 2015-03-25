@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 //import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -48,5 +49,19 @@ public class ScreenSliderPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return list.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch(position){
+            case(0): return "Monday";
+            case(1): return "Tuesday";
+            case(2): return "Wednesday";
+            case(3): return "Thursday";
+            case(4): return "Wednesday";
+            case(5): return "Friday";
+            case(6): return "Saturday";
+            default: return "error";
+        }
     }
 }

@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+//import android.support.v4.view.PagerTitleStrip;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,7 +61,9 @@ public class ScreenSlidePagerActivity extends FragmentActivity{
             case("Saturday"):   position = 5; break;
             //case("Sunday"):     position = 6; break;
         }
+        //PagerTitleStrip pg = new PagerTitleStrip(getPageTitle(position));
         viewPager.setCurrentItem(position);
+
     }
 
     @Override
