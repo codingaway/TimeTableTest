@@ -11,9 +11,11 @@ import android.support.v4.app.FragmentActivity;
 //import android.support.v4.app.Fragment;
 //import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -43,6 +45,11 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
+        PagerTitleStrip titleStrip = (PagerTitleStrip)findViewById(R.id.title_strip);
+
+        titleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        titleStrip.setTextColor(0xffffffff);
+        titleStrip.setNonPrimaryAlpha(0.3f);
 
         ArrayList<ArrayList<Session>> weeklyList = readDataFromFile();
         // Instantiate a ViewPager and a PagerAdapter.
@@ -141,5 +148,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    
 
 }

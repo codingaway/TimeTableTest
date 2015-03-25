@@ -20,7 +20,7 @@ import android.app.ProgressDialog;
 /**
  * Created by Josh on 22/02/2015.
  */
-public class Login extends ActionBarActivity implements DownloadResultReceiver.Receiver{
+public class Login extends ActionBarActivity implements DownloadResultReceiver.Receiver {
 
     private final String fileName = "data.dat";
     private DownloadResultReceiver mReceiver;
@@ -29,28 +29,28 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
 
 
     EditText input;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
 
-        Button loginBtn = (Button)findViewById(R.id.loginBtn);
-        input = (EditText)findViewById(R.id.idInput);
+        Button loginBtn = (Button) findViewById(R.id.loginBtn);
+        input = (EditText) findViewById(R.id.idInput);
         loginBtn.setOnClickListener(
-                new View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
+                    public void onClick(View v) {
                         final String userID = input.getText().toString();
 
-                        if(userID.length() == 0 || userID.length() != 8){
+                        if (userID.length() == 0 || userID.length() != 8) {
                             //using R.string.thestringname references it from the strings.xml so no hard-coding text
-                            Toast.makeText(Login.this, R.string.login_error,Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_LONG).show();
                             //Add further validation for student ID
                             /*First 2 digits = Year of application
                               Next 5 digits = Sequential number
                               Last digit = A MOD 11 check digit*/
-                        }
-                        else {
+                        } else {
 
                             //Stores the Student ID (userID) into shared preferences
                             SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -99,7 +99,7 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
 
                 //Toast.makeText(this, "Running", Toast.LENGTH_LONG).show();
             }
-                break;
+            break;
             case DownloadDataIntentService.STATUS_FINISHED: {
                 mProgressDialog.dismiss();
                 Toast.makeText(this, "New data saved!", Toast.LENGTH_LONG).show();
@@ -110,56 +110,14 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
                 startActivity(secondIntent);
 
             }
-                break;
+            break;
             case DownloadDataIntentService.STATUS_ERROR: {
                 // handle the error;
                 mProgressDialog.dismiss();
                 Toast.makeText(this, "Error reading data from the server, try again!", Toast.LENGTH_LONG).show();
             }
-                break;
+            break;
         }
 
     }
-
-    /*
-    private void readDataFromFile()
-    {
-        File file = new File(fileName);
-        if(file.exists())
-        {
-            //We have data file so read data from it
-            try {
-
-                //Object input stream
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-                weeklyList = (ArrayList<ArrayList<Session>>) (ois.readObject());
-                ois.close();
-            }
-            catch(Exception ex)
-            {
-                ex.printStackTrace();
-            }
-
-            if(weeklyList.size() > 0)
-            {
-                //Get sessions list for each day
-                for(int i = 0; i < weeklyList.size(); i++)
-                {
-                    ArrayList<Session> day = weeklyList.get(i);
-                    for(Session s: day)
-                    {
-//                        System.out.print(s.getStartTime() + " "
-//                                + s.getModule() + " "
-//                                + s.getRoomCode() + "\n");
-                    }
-                }
-            }
-        }
-        else
-        {
-            //prompt user for login and get data from the server
-        }
-    }
-    */
-
 }
