@@ -2,6 +2,9 @@ package com.example.timetabletest;
 
 import android.app.ProgressDialog;
 //import android.content.Context;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 //import android.support.v4.app.FragmentManager;
@@ -9,7 +12,11 @@ import android.support.v4.app.FragmentActivity;
 //import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 //import android.support.v4.view.PagerTitleStrip;
 
 import java.io.File;
@@ -23,7 +30,7 @@ import java.util.Locale;
 /**
  * Created by casper on 18/03/15.
  */
-public class ScreenSlidePagerActivity extends FragmentActivity{
+public class ScreenSlidePagerActivity extends ActionBarActivity{
 
     //private final String fileName = "data.dat";
     private DownloadResultReceiver mReceiver;
@@ -103,6 +110,36 @@ public class ScreenSlidePagerActivity extends FragmentActivity{
             Log.d("LOG", "File not found!");
         }
         return weeklyList;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        /*if (id == R.id.action_settings) {
+            return true;
+        }*/
+        switch(id){
+            case R.id.action_settings: Intent settingsIntent =  new Intent(ScreenSlidePagerActivity.this, SettingsActivity.class); startActivity(settingsIntent);break;
+            case R.id.preferences: Toast.makeText(ScreenSlidePagerActivity.this, "Preferences was selected", Toast.LENGTH_LONG).show(); break;
+            case R.id.customise: Toast.makeText(ScreenSlidePagerActivity.this, "Customise was selected", Toast.LENGTH_LONG).show(); break;
+            case R.id.update: SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);SharedPreferences.Editor editor = sharedPref.edit();editor.putString("studentID", "");editor.apply(); break;
+            case R.id.planner: Toast.makeText(ScreenSlidePagerActivity.this, "Add a meeting/agenda was selected", Toast.LENGTH_LONG).show(); break;
+            case R.id.help: Toast.makeText(ScreenSlidePagerActivity.this, "Help was selected", Toast.LENGTH_LONG).show(); break;
+            default: Toast.makeText(ScreenSlidePagerActivity.this, "Default was selected", Toast.LENGTH_LONG).show(); break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

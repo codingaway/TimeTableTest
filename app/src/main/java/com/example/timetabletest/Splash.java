@@ -35,7 +35,7 @@ public class Splash extends Activity{
                     Splash.this.finish();
                 }
                 else{
-                    Intent mainIntent = new Intent(Splash.this, Login.class);
+                    Intent mainIntent = new Intent(Splash.this, ScreenSlidePagerActivity.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
                 }
