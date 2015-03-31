@@ -75,12 +75,6 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
                             mProgressDialog.setMessage("Download in progress...");
                             mProgressDialog.setIndeterminate(false);
                             mProgressDialog.show();
-
-                            //Need a check/splash screen to know when service is complete before loading MainActivity for the first time
-//
-//                            Intent secondIntent = new Intent(Login.this, MainActivity.class);
-//                            startActivity(secondIntent);
-
                         }
                     }
                 }
@@ -120,46 +114,4 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
         }
 
     }
-
-    /*
-    private void readDataFromFile()
-    {
-        File file = new File(fileName);
-        if(file.exists())
-        {
-            //We have data file so read data from it
-            try {
-
-                //Object input stream
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-                weeklyList = (ArrayList<ArrayList<Session>>) (ois.readObject());
-                ois.close();
-            }
-            catch(Exception ex)
-            {
-                ex.printStackTrace();
-            }
-
-            if(weeklyList.size() > 0)
-            {
-                //Get sessions list for each day
-                for(int i = 0; i < weeklyList.size(); i++)
-                {
-                    ArrayList<Session> day = weeklyList.get(i);
-                    for(Session s: day)
-                    {
-//                        System.out.print(s.getStartTime() + " "
-//                                + s.getModule() + " "
-//                                + s.getRoomCode() + "\n");
-                    }
-                }
-            }
-        }
-        else
-        {
-            //prompt user for login and get data from the server
-        }
-    }
-    */
-
 }

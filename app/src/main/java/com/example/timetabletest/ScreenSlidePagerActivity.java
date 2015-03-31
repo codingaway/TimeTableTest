@@ -5,8 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+//import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.FragmentActivity;
 //import android.support.v4.app.FragmentManager;
 //import android.support.v4.app.Fragment;
 //import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.widget.Toast;
 //import android.support.v4.view.PagerTitleStrip;
 
@@ -32,12 +36,10 @@ import java.util.Locale;
  */
 public class ScreenSlidePagerActivity extends ActionBarActivity{
 
-    //private final String fileName = "data.dat";
     private DownloadResultReceiver mReceiver;
     private ProgressDialog mProgressDialog;
     private ViewPager viewPager;
     private PagerAdapter mPagerAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,8 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
         setContentView(R.layout.activity_screen_slide);
 
         ArrayList<ArrayList<Session>> weeklyList = readDataFromFile();
-        // Instantiate a ViewPager and a PagerAdapter.
 
+        // Instantiate a ViewPager and a PagerAdapter.
         viewPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSliderPagerAdapter(getSupportFragmentManager(), weeklyList);
         viewPager.setAdapter(mPagerAdapter);
@@ -68,9 +70,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
             case("Saturday"):   position = 5; break;
             //case("Sunday"):     position = 6; break;
         }
-        //PagerTitleStrip pg = new PagerTitleStrip(getPageTitle(position));
         viewPager.setCurrentItem(position);
-
     }
 
     @Override
@@ -82,6 +82,17 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
         } else {
             // Otherwise, select the previous page.
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ScreenSlidePagerActivity.this, FullWeekActivity.class));
         }
     }
 
@@ -142,4 +153,9 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
         return super.onOptionsItemSelected(item);
     }
 
+   @Override
+    protected void onDestroy(){
+       super.onDestroy();
+       //myOrientationEventListener.disable();
+   }
 }
