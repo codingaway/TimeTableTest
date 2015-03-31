@@ -16,7 +16,10 @@ import java.util.ArrayList;
 /**
  * Created by Loaner on 25/03/2015.
  */
-public class FullWeekActivity extends Activity{
+public class FullWeekActivity extends Activity implements View.OnClickListener {
+
+    private ArrayList<ArrayList<Session>> weeklyList;
+
 
 
     @Override
@@ -74,7 +77,7 @@ public class FullWeekActivity extends Activity{
         TextView txtFri16 = (TextView)findViewById(R.id.txtFri16);
         TextView txtFri17 = (TextView)findViewById(R.id.txtFri17);
 
-        ArrayList<ArrayList<Session>> weeklyList = readDataFromFile();
+        weeklyList = readDataFromFile();
 
         for(int j = 0; j < weeklyList.size(); j++){
             ArrayList<Session> day = weeklyList.get(j);
@@ -152,13 +155,17 @@ public class FullWeekActivity extends Activity{
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FullWeekActivity.this, ScreenSlidePagerActivity.class));
         }
     }
 
+    @Override
     public void onClick(View v){
         Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
+        /*switch(v){
+            case(txtMon9): ; break;
+        }*/
     }
 
     private ArrayList<ArrayList<Session>> readDataFromFile()

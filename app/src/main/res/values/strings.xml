@@ -2,27 +2,17 @@
 <resources>
 
     <string name="app_name">UL Timetable</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="preferences">Preferences</string>
     <string name="customise">Customise</string>
-    <string name="update">Update</string>
+    <string name="update">Log out</string>
     <string name="planner">Add a meeting/agenda</string>
     <string name="help">Help</string>
     <string name="loading">Loading...</string>
     <string name="splash_screen">Splash Screen</string>
     <string name="initial_label">Enter student ID</string>
     <string name="login_btn">Login</string>
-    <string name="day1">Monday</string>
-    <string name="day2">Tuesday</string>
-    <string name="day3">Wednesday</string>
-    <string name="day4">Thursday</string>
-    <string name="day5">Friday</string>
-    <string name="day6">Saturday</string>
-    <string name="day7">Sunday</string>
     <string name="login_error">Must enter a valid student ID</string>
 
 </resources>

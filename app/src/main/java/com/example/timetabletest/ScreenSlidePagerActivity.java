@@ -5,21 +5,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 //import android.hardware.SensorManager;
 import android.os.Bundle;
-//import android.support.v4.app.FragmentActivity;
-//import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.Fragment;
-//import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.OrientationEventListener;
 import android.widget.Toast;
 //import android.support.v4.view.PagerTitleStrip;
 
@@ -91,7 +85,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
 
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ScreenSlidePagerActivity.this, FullWeekActivity.class));
         }
     }
@@ -145,7 +139,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
             case R.id.action_settings: Intent settingsIntent =  new Intent(ScreenSlidePagerActivity.this, SettingsActivity.class); startActivity(settingsIntent);break;
             case R.id.preferences: Toast.makeText(ScreenSlidePagerActivity.this, "Preferences was selected", Toast.LENGTH_LONG).show(); break;
             case R.id.customise: Toast.makeText(ScreenSlidePagerActivity.this, "Customise was selected", Toast.LENGTH_LONG).show(); break;
-            case R.id.update: SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);SharedPreferences.Editor editor = sharedPref.edit();editor.putString("studentID", "");editor.apply(); break;
+            case R.id.update: SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE); SharedPreferences.Editor editor = sharedPref.edit(); editor.putString("studentID", ""); editor.apply(); startActivity(new Intent(ScreenSlidePagerActivity.this, Splash.class));break;
             case R.id.planner: Toast.makeText(ScreenSlidePagerActivity.this, "Add a meeting/agenda was selected", Toast.LENGTH_LONG).show(); break;
             case R.id.help: Toast.makeText(ScreenSlidePagerActivity.this, "Help was selected", Toast.LENGTH_LONG).show(); break;
             default: Toast.makeText(ScreenSlidePagerActivity.this, "Default was selected", Toast.LENGTH_LONG).show(); break;
@@ -156,6 +150,5 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
    @Override
     protected void onDestroy(){
        super.onDestroy();
-       //myOrientationEventListener.disable();
    }
 }
