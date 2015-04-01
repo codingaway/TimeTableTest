@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-//import java.io.File;
-//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -25,6 +22,9 @@ public class DownloadDataIntentService extends IntentService {
     public static final int STATUS_RUNNING = 0;
     public static final int STATUS_FINISHED = 1;
     public static final int STATUS_ERROR = 2;
+    public static final int NO_DATA_FOUND = 3;
+    private  boolean hasData = false;
+
     private static final String TAG = "DownloadData";
     private static final String filename = "data.dat";
     private static final String URL = "http://www.timetable.ul.ie/tt2.asp?T1=";
@@ -45,7 +45,6 @@ public class DownloadDataIntentService extends IntentService {
             receiver.send(STATUS_RUNNING, Bundle.EMPTY);
         }
 
-        Log.d("LOG", "Starting Service...");
 
             SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             studentID = sharedPref.getString("studentID", "ID not found");
@@ -55,8 +54,7 @@ public class DownloadDataIntentService extends IntentService {
 
 
                 //Write data to the file
-                Log.d("LOG", "Writing data to file...");
-                if (days != null) {
+                if (days != null && hasData) {
                     //File file = new File(getApplicationContext().getFilesDir(), filename);
 
                     //FileOutputStream fos = openFileOutput("data.dat", Context.MODE_PRIVATE);
@@ -66,6 +64,11 @@ public class DownloadDataIntentService extends IntentService {
                         //oos = new ObjectOutputStream(new FileOutputStream(file));
                         oos = new ObjectOutputStream(openFileOutput(filename, Context.MODE_PRIVATE));
                         oos.writeObject(days);
+
+                        if(receiver != null) {
+                            receiver.send(STATUS_FINISHED, Bundle.EMPTY);
+                        }
+
                     } catch (IOException ex) {
                         if(receiver != null)
                             receiver.send(STATUS_ERROR, Bundle.EMPTY);
@@ -73,17 +76,17 @@ public class DownloadDataIntentService extends IntentService {
                         //Close Object IOStream
                         try {
                             oos.close();
-                            Log.d("LOG", "File was written successfully!");
                         } catch (IOException ex) {
 
                         }
                     }
                 }
+                else
+                {
+                    if(receiver != null)
+                        receiver.send(NO_DATA_FOUND, Bundle.EMPTY);
+                }
             }
-
-        if (receiver != null) {
-            receiver.send(STATUS_FINISHED, Bundle.EMPTY);
-        }
     }
 
     @Override
@@ -98,7 +101,8 @@ public class DownloadDataIntentService extends IntentService {
 
     //Method for fetching data from website using JSoup
     private void fetchData(ResultReceiver receiver) {
-        Log.d("LOG", "Trying to download data...");
+
+
         String slotEntry;
         Document doc = null;
         try {
@@ -109,8 +113,11 @@ public class DownloadDataIntentService extends IntentService {
                 receiver.send(STATUS_ERROR, Bundle.EMPTY);
             ex.printStackTrace();
         }
+
+
         days = new ArrayList<ArrayList<Session>>();
         try {
+
             Element table = doc.select("table").get(0); // Select the first table
             Elements rows = table.select("tr");
 
@@ -138,10 +145,11 @@ public class DownloadDataIntentService extends IntentService {
                 }
             }
         } catch (NullPointerException nex) {
-            if(receiver != null)
+            if (receiver != null)
                 receiver.send(STATUS_ERROR, Bundle.EMPTY);
             nex.printStackTrace();
         }
+
     }
 
 
@@ -159,15 +167,22 @@ public class DownloadDataIntentService extends IntentService {
         //System.out.println(slotEntry);
         dataFields = slotEntry.split(" ");
 
-        startTime = dataFields[0].trim();
-        endTime = dataFields[1].trim();
-        module = dataFields[2].trim();
-        type = dataFields[3].trim();
-        groupID = dataFields[4].trim();
-        roomCode = dataFields[5].trim();
+        if(dataFields.length > 1)
+        {
+            startTime = dataFields[0].trim();
+            endTime = dataFields[1].trim();
+            module = dataFields[2].trim();
+            type = dataFields[3].trim();
+            groupID = dataFields[4].trim();
+            roomCode = dataFields[5].trim();
 
-        Session s = new Session(startTime, endTime, module, type, groupID, roomCode);
-        list.add(s);
+            Session s = new Session(startTime, endTime, module, type, groupID, roomCode);
+            list.add(s);
+
+            if(!hasData)
+                hasData = true;
+        }
+
     }
 
 }

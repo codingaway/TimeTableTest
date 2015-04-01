@@ -5,7 +5,7 @@
     <item android:id="@+id/preferences" android:title="@string/preferences"
         android:orderInCategory="100" app:showAsAction="never" />
 
-    <item android:id="@+id/customise" android:title="@string/customise"
+    <item android:id="@+id/logout" android:title="@string/logout"
         android:orderInCategory="100" app:showAsAction="never" />
 
     <item android:id="@+id/update" android:title="@string/update"
