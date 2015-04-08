@@ -22,7 +22,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile files('/Users/casper/AndroidStudioProjects/TimeTableTest/libs/jsoup-1.8.1.jar')
-    compile files('/Users/casper/AndroidStudioProjects/TimeTableTest/libs/jsoup-1.8.1.jar')
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:support-v4:22.0.0'
+    compile files('C:/Users/Loaner/AndroidStudioProjects/TimeTableTest/libs/jsoup-1.8.1.jar')
+    compile 'com.android.support:appcompat-v7:21.0.3'
 }

@@ -10,6 +10,7 @@
     <string name="preferences">Preferences</string>
     <string name="logout">Log out</string>
     <string name="update">Update</string>
+    <string name="action_location">Location</string>
     <string name="planner">Add a meeting/agenda</string>
     <string name="help">Help</string>
     <string name="loading">Loading...</string>

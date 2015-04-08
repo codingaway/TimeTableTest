@@ -2,9 +2,7 @@ package com.example.timetabletest;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -28,7 +26,6 @@ public class WeeklyViewAdapter extends BaseAdapter {
 
 
     public WeeklyViewAdapter(Context c)
-
     {
         super();
         list = AppData.getData();
@@ -96,24 +93,5 @@ public class WeeklyViewAdapter extends BaseAdapter {
 
         return textView;
     }
-//
-//    private String getCellData(int row, int col)
-//    {
-//        if(row == 0 && col == 0)
-//            return "";
-//        else if(row == 0)
-//            return weekDay[col];
-//        else if(col == 0)
-//            return timeSlot[row];
-//        else
-//        {
-//            ArrayList<Session> daysList = list.get(col -1); //col is non-zero here(1-6)
-//            for(Session s: daysList)
-//            {
-//                if(timeSlot[row].compareTo(s.getStartTime()) == 0)
-//                    return s.getModule();
-//            }
-//        }
-//        return null;
-//    }
+
 }

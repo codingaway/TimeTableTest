@@ -164,6 +164,6 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
     }
 }

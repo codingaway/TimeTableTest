@@ -48,52 +48,40 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
 
             int position = 0;
             switch (weekDay) {
-                case ("Monday"):
-                    position = 0;
-                    break;
-                case ("Tuesday"):
-                    position = 1;
-                    break;
-                case ("Wednesday"):
-                    position = 2;
-                    break;
-                case ("Thursday"):
-                    position = 3;
-                    break;
-                case ("Friday"):
-                    position = 4;
-                    break;
-                case ("Saturday"):
-                    position = 5;
-                    break;
-                case ("Sunday"):
-                    position = 5;
-                    break;//There is no SUNDAY go back to Saturday
+                case ("Monday"): position = 0; break;
+                case ("Tuesday"): position = 1; break;
+                case ("Wednesday"): position = 2; break;
+                case ("Thursday"): position = 3; break;
+                case ("Friday"): position = 4; break;
+                case ("Saturday"): position = 5; break;
+                case ("Sunday"): position = 5; break;//There is no SUNDAY go back to Saturday
             }
             viewPager.setCurrentItem(position);
         }
         else
         {
-
-           SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("studentID", "");
             editor.apply();
             startActivity(new Intent(this, Login.class));
+            finish();
         }
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
+        // Checks the orientation of the screen and starts new activity for landscape view
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             startActivity(new Intent(ScreenSlidePagerActivity.this, WeeklyView.class));
+            finish();
         }
     }
 
@@ -113,13 +101,12 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
 
         switch(id) {
             case R.id.action_settings:
+            {
                 Intent settingsIntent = new Intent(ScreenSlidePagerActivity.this, SettingsActivity.class);
-
                 startActivity(settingsIntent);
-                break;
-            case R.id.preferences:
-                Toast.makeText(ScreenSlidePagerActivity.this, "Preferences was selected", Toast.LENGTH_LONG).show();
-                break;
+            }
+            break;
+//            case R.id.preferences: Toast.makeText(ScreenSlidePagerActivity.this, "Preferences was selected", Toast.LENGTH_LONG).show(); break;
             case R.id.logout:
             {
                 SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -133,6 +120,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
                 Intent mainIntent = new Intent(this, Login.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 this.startActivity(mainIntent);
+                finish();
             }
             break;
             case R.id.update:
@@ -141,10 +129,17 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
                     AppData.setData(null);
                     Intent mainIntent = new Intent(this, Login.class);
                     this.startActivity(mainIntent);
+                    finish();
                 }
                  break;
-            case R.id.planner: Toast.makeText(ScreenSlidePagerActivity.this, "Add a meeting/agenda was selected", Toast.LENGTH_LONG).show(); break;
-            case R.id.help: Toast.makeText(ScreenSlidePagerActivity.this, "Help was selected", Toast.LENGTH_LONG).show(); break;
+            case R.id.action_map:
+            {
+                //setImageResource(R.drawable.map);
+                startActivity(new Intent(this, ImageActivity.class));
+            }
+            break;
+//            case R.id.planner: Toast.makeText(ScreenSlidePagerActivity.this, "Add a meeting/agenda was selected", Toast.LENGTH_LONG).show(); break;
+//            case R.id.help: Toast.makeText(ScreenSlidePagerActivity.this, "Help was selected", Toast.LENGTH_LONG).show(); break;
             default: Toast.makeText(ScreenSlidePagerActivity.this, "Default was selected", Toast.LENGTH_LONG).show(); break;
         }
         return super.onOptionsItemSelected(item);

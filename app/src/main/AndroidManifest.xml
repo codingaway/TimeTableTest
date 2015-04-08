@@ -40,6 +40,12 @@
         </activity>
 
         <activity
+            android:name=".ImageActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+            </activity>
+
+        <activity
             android:name=".WeeklyView"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name">

@@ -1,7 +1,6 @@
 package com.example.timetabletest;
 
 import android.app.Application;
-import android.content.Intent;
 import android.util.Log;
 
 import java.io.File;
