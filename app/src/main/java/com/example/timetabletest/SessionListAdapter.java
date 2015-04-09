@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class SessionListAdapter extends BaseAdapter {
 
     private ArrayList<Session> sessionList;
-    private Session session;
 
     public SessionListAdapter(ArrayList<Session> sessionList)
     {

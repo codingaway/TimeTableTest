@@ -46,7 +46,6 @@ public class ApplicationState extends Application {
             ObjectInputStream ois = new ObjectInputStream(openFileInput("data.dat"));
             weeklyList = (ArrayList<ArrayList<Session>>) (ois.readObject());
             ois.close();
-            Log.d("LOG", "File read successfully!");
         }
         catch(Exception ex)
         {

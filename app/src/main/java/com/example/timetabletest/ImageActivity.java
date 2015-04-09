@@ -32,7 +32,6 @@ import android.app.Activity;
         import android.widget.ImageView;
 
 public class ImageActivity extends Activity implements OnTouchListener{
-    private static final String TAG = "Touch";
     @SuppressWarnings("unused")
     private static final float MIN_ZOOM = 1f,MAX_ZOOM = 1f;
 
@@ -75,7 +74,6 @@ public class ImageActivity extends Activity implements OnTouchListener{
             case MotionEvent.ACTION_DOWN:   // first finger down only
                 savedMatrix.set(matrix);
                 start.set(event.getX(), event.getY());
-                Log.d(TAG, "mode=DRAG"); // write to LogCat
                 mode = DRAG;
                 break;
 
@@ -84,18 +82,15 @@ public class ImageActivity extends Activity implements OnTouchListener{
             case MotionEvent.ACTION_POINTER_UP: // second finger lifted
 
                 mode = NONE;
-                Log.d(TAG, "mode=NONE");
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN: // first and second finger down
 
                 oldDist = spacing(event);
-                Log.d(TAG, "oldDist=" + oldDist);
                 if (oldDist > 5f) {
                     savedMatrix.set(matrix);
                     midPoint(mid, event);
                     mode = ZOOM;
-                    Log.d(TAG, "mode=ZOOM");
                 }
                 break;
 
@@ -110,7 +105,6 @@ public class ImageActivity extends Activity implements OnTouchListener{
                 {
                     // pinch zooming
                     float newDist = spacing(event);
-                    Log.d(TAG, "newDist=" + newDist);
                     if (newDist > 5f)
                     {
                         matrix.set(savedMatrix);

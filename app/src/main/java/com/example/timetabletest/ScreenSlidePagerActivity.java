@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -38,7 +37,6 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
             viewPager = (ViewPager) findViewById(R.id.pager);
             mPagerAdapter = new ScreenSliderPagerAdapter(getSupportFragmentManager(), weeklyList);
             viewPager.setAdapter(mPagerAdapter);
-            Log.d("LOG", "ViewPager Loaded!");
 
             //Get Day of the week and change to integer value representing the page fragment to load in adapter
             String weekDay;
@@ -102,8 +100,8 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
         switch(id) {
             case R.id.action_settings:
             {
-                Intent settingsIntent = new Intent(ScreenSlidePagerActivity.this, SettingsActivity.class);
-                startActivity(settingsIntent);
+                //Intent settingsIntent = new Intent(ScreenSlidePagerActivity.this, SettingsActivity.class);
+                //startActivity(settingsIntent);
             }
             break;
 //            case R.id.preferences: Toast.makeText(ScreenSlidePagerActivity.this, "Preferences was selected", Toast.LENGTH_LONG).show(); break;
@@ -115,6 +113,7 @@ public class ScreenSlidePagerActivity extends ActionBarActivity{
                 editor.apply();
                 File dataFile = new File(getFilesDir(), "data.dat");
                 boolean success = dataFile.delete();
+                AppData.setData(null);
                 if(success)
                     Toast.makeText(this, "Data deleted", Toast.LENGTH_LONG).show();
                 Intent mainIntent = new Intent(this, Login.class);

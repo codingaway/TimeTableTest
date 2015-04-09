@@ -101,7 +101,7 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
         switch (resultCode) {
             case DownloadDataIntentService.STATUS_RUNNING: {
             }
-                break;
+            break;
 
             case DownloadDataIntentService.STATUS_FINISHED:
             {
@@ -114,16 +114,17 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
                 //We have data file; Start Screen slider Activity
                 Intent secondIntent = new Intent(Login.this, ScreenSlidePagerActivity.class);
                 startActivity(secondIntent);
-
+                finish();
             }
-                break;
+            break;
+
             case DownloadDataIntentService.STATUS_ERROR:
             {
                 // handle the error;
                 mProgressDialog.dismiss();
                 Toast.makeText(this, "Error reading data from the server, try again!", Toast.LENGTH_LONG).show();
             }
-                break;
+            break;
 
             case DownloadDataIntentService.NO_DATA_FOUND:
             {
@@ -148,16 +149,11 @@ public class Login extends ActionBarActivity implements DownloadResultReceiver.R
                 ObjectInputStream ois = new ObjectInputStream(openFileInput("data.dat"));
                 weeklyList = (ArrayList<ArrayList<Session>>) (ois.readObject());
                 ois.close();
-                Log.d("LOG", "File read successfully!");
             }
             catch(Exception ex)
             {
                 ex.printStackTrace();
             }
-        }
-        else
-        {
-            Log.d("LOG", "File not found!");
         }
         return weeklyList;
     }

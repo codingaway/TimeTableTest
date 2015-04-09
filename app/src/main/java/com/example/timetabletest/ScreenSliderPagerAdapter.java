@@ -7,7 +7,6 @@ package com.example.timetabletest;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,6 @@ public class ScreenSliderPagerAdapter extends FragmentStatePagerAdapter {
     public ScreenSliderPagerAdapter(FragmentManager fm, ArrayList<ArrayList<Session>> list) {
         super(fm);
         this.list = list;
-        Log.d("LOG", "New ScreenPagerAdapter created!");
     }
 
 
@@ -31,7 +29,7 @@ public class ScreenSliderPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         //Use position(which is page number to get a certain days Session)
 
-        Log.d("LOG", "Getting a Fragment...");
+
         ArrayList<Session> todaysList = list.get(position);
 
         //instantiate a list adapter using todaysList
@@ -40,7 +38,7 @@ public class ScreenSliderPagerAdapter extends FragmentStatePagerAdapter {
         //instantiate a Pager fragment
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
         fragment.setListAdapter(listAdapter);
-        Log.d("LOG", "New list Fragment is created!");
+
         return fragment;
     }
 
